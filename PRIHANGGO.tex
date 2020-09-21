@@ -1,0 +1,658 @@
+%%-- GEO1001.2020--hw01
+%%-- [MAUNDRI PRIHANGGO] 
+%%-- [5151279]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Intro to LaTeX and Template for Homework Assignments
+%% Quantitative Methods in Political Science
+%% University of Mannheim
+%% Fall 2018
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% created by Marcel Neunhoeffer & Sebastian Sternberg
+
+
+% This template and tutorial will help you to write up your homework. It will also help you to use Latex for other assignments than this course's homework.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Before we get started
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Make an account on overleaf.com and get started. No need to install anything.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Or if you want it the nerdy way...
+% INSTALL LATEX: Before we can get started you need to install LaTeX on your computer.
+				% Windows: http://miktex.org/download
+				% Mac:         http://www.tug.org/mactex/mactex-download.html	
+				% There a many more different LaTeX editors out there for both operating systems. I use TeXworks because it looks the same on Windows and Mac.
+				
+
+% SAVE THE FILE: The first thing you need to do is to save your LaTeX file in a directory as a .tex file. You will not be able to do anything else unless your file is saved. I suggest to save the .tex file in the same folder with your .R script and where you will save your plots from R to. Let's call this file template_homework1.tex and save it in your Week 1 folder.
+
+
+% COMPILE THE FILE: After setting up your file, using your LaTeX editor (texmaker, texshop), you can compile your document using PDFLaTeX.
+	% Compiling your file tells LaTeX to take the code you have written and create a pdf file
+	% After compiling your file, in your directory will appear four new files, including a .pdf file. This is your output document.
+	% It is good to compile your file regularly so that you can see how your code is translating into your document.
+	
+	
+% ERRORS: If you get an error message, something is wrong in your code. Fix errors before they pile up!
+	% As with error messages in R, google the exact error message if you have a question!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Now again for everyone...
+
+% COMMANDS: 
+	% To do anything in LaTeX, you must use commands
+	% Commands tell LaTeX when to start your document, how you want your document to look, and how to format your document
+	% Commands ALWAYS begin with a backslash \
+
+% Everything following the % sign is a comment and will not be used by Latex to compile your document.
+% This is very similar to # comments in R.
+
+% Every .tex file usually consists of four parts.
+% 1. Document Class
+% 2. Packages
+% 3. Header
+% 4. Your Document
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document Class
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ % The first command you will always have will declare your document class. This tells LaTeX what type of document you are creating (article, presentation, poster, etc). 
+% \documentclass is the command
+% in {} you specify the type of document
+% in [] you define additional parameters
+ 
+\documentclass[a4paper,12pt]{article} % This defines the style of your paper
+\usepackage[font=scriptsize, skip = 0pt]{caption}
+\usepackage{mwe}
+% We usually use the article type. The additional parameters are the format of the paper you want to print it on and the standard font size. For us this is a4paper and 12pt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Packages are libraries of commands that LaTeX can call when compiling the document. With the specialized commands you can customize the formatting of your document.
+% If the packages we call are not installed yet, TeXworks will ask you to install the necessary packages while compiling.
+
+% First, we usually want to set the margins of our document. For this we use the package geometry. We call the package with the \usepackage command. The package goes in the {}, the parameters again go into the [].
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+
+% Unfortunately, LaTeX has a hard time interpreting German Umlaute. The following two lines and packages should help. If it doesn't work for you please let me know.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% The following two packages - multirow and booktabs - are needed to create nice looking tables.
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+
+% As we usually want to include some plots (.pdf files) we need a package for that.
+\usepackage{graphicx} 
+
+% The default setting of LaTeX is to indent new paragraphs. This is useful for articles. But not really nice for homework problem sets. The following command sets the indent to 0.
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+
+% Package to place figures where you want them.
+\usepackage{float}
+
+% The fancyhdr package let's us create nice headers.
+\usepackage{fancyhdr}
+
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{unsrtnat}
+\title{Bibliography management: \texttt{natbib} package}
+\author{Share\LaTeX}
+\date { }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To make our document nice we want a header and number the pages in the footer.
+
+\pagestyle{fancy} % With this command we can customize the header style.
+
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+\lhead{\footnotesize GEO1001: Homework 1}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+
+%\rhead works just like \lhead (you can also use \chead)
+\rhead{\footnotesize Maundri Prihanggo (5151279)} %<---- Fill in your lastnames.
+
+% Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
+% We want to put our page number in the center.
+\cfoot{\footnotesize \thepage} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4. Your document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Now, you need to tell LaTeX where your document starts. We do this with the \begin{document} command.
+% Like brackets every \begin{} command needs a corresponding \end{} command. We come back to this later.
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title section of the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For the title section we want to reproduce the title section of the Problem Set and add your names.
+
+\thispagestyle{empty} % This command disables the header on the first page. 
+
+\begin{tabular}{p{15.5cm}} % This is a simple tabular environment to align your text nicely 
+{\large \bf Sensing Technologies and Mathematics for Geomatics} \\
+GEO1001.2020 \\ MSc Geomatics \\ Delft University of Technology \\
+\hline % \hline produces horizontal lines.
+\\
+\end{tabular} % Our tabular environment ends here.
+
+\vspace*{0.3cm} % Now we want to add some vertical space in between the line and our title.
+
+\begin{center} % Everything within the center environment is centered.
+	{\Large \bf Homework 1} % <---- Don't forget to put in the right number
+	\vspace{2mm}
+	
+        % YOUR NAMES GO HERE
+	{\bf Maundri Prihanggo (5151279)} % <---- Fill in your names here!
+		
+\end{center}  
+
+\vspace{0.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Up until this point you only have to make minor changes for every week (Number of the homework). Your write up essentially starts here.
+
+\begin{flushleft}
+\Large{After Lesson 01.}
+\end{flushleft}
+
+\begin{enumerate}
+
+\item {\it Compute mean statistics (mean, variance and standard deviation for each of the sensors variables), what do you observe from the results?}. % <--- For future Homework sets you of course have to change the questions.
+
+Table 1 gives us information about statistics data from each sensors variables. We can see the Mean, Variance and Standard Deviation (std) from sensor A, B, D, and E. If we see from the Table 1, there aren't much differences in Mean value of each variable. For instance, in wind speed variable, sensor D has the highest value with 1.58 m/s and sensor E has the lowest value with 0.59 m/s therefore the difference of the highest and the lowest mean is less than 1 m/s (see Table 2). We can say that the central tendency of wind speed variable is relatively close to each sensor therefore the wind speed value in each sensor is relatively close too.
+
+Table 2 shows the highest and lowest Mean, variance and Standard Deviation Value. If we take a look at the table, we can see that sensor D has the highest mean of Barometric Pressure but the lowest mean of standard deviation and sensor E is the opposite. Therefore we can say that the Barometric Pressure value of sensor D is not as widely spread as sensor E because Barometric Pressure value in sensor D is tend to be close to its central tendency. We can make another observation by checking both tabel 1 and table 2. 
+\setlength{\belowcaptionskip}{-10pt}
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Variable}} & \multicolumn{3}{c|}{sensor A}            & \multicolumn{3}{c|}{sensor B}            & \multicolumn{3}{c|}{sensor C}            & \multicolumn{3}{c|}{sensor D}            & \multicolumn{3}{c|}{sensor E}            \\ \cline{2-16} 
+\multicolumn{1}{|c|}{}                          & mean         & variance    & std         & mean         & variance    & std         & mean         & variance    & std         & mean         & variance    & std         & mean         & variance    & std         \\ \hline
+Wind speed {[}m/s{]}                            & 1.290306947  & 1.251154492 & 1.118550174 & 1.242124394  & 1.301501586 & 1.140833724 & 1.371463217  & 1.430920058 & 1.196210708 & 1.581649151  & 1.73981677  & 1.319021141 & 0.596242424  & 0.51122678  & 0.715001245 \\ \hline
+Wind direction {[}deg{]}                        & 209.4063005  & 10108.94031 & 100.5432261 & 183.4123586  & 9977.21777  & 99.8860239  & 183.5889248  & 7703.363096 & 87.7688048  & 198.3265966  & 8133.890057 & 90.18808157 & 223.9563636  & 9308.28508  & 96.47945418 \\ \hline
+Crosswind Speed {[}m/s{]}                       & 0.964943457  & 0.926592764 & 0.962596886 & 0.835621971  & 0.878585108 & 0.937328709 & 0.963298302  & 1.042574802 & 1.021065523 & 1.210509297  & 1.451502935 & 1.204783356 & 0.438505051  & 0.315941984 & 0.562087168 \\ \hline
+Headwind Speed {[}m/s{]}                        & 0.163529887  & 1.034940101 & 1.017320058 & -0.129806139 & 1.256719316 & 1.121034931 & -0.262894099 & 1.271732179 & 1.127711035 & -0.300565885 & 1.232502712 & 1.110181387 & 0.194949495  & 0.319073108 & 0.564865566 \\ \hline
+Temperature {[}deg C{]}                         & 17.96910339  & 15.86426926 & 3.982997522 & 18.06542811  & 16.62906693 & 4.077875296 & 17.91313662  & 16.10453824 & 4.013046005 & 17.99636217  & 16.10559129 & 4.013177206 & 18.35393939  & 19.04313221 & 4.363843743 \\ \hline
+Globe Temperature {[}deg C{]}                   & 21.54458805  & 68.19135252 & 8.257805551 & 21.79943457  & 66.04931685 & 8.12707308  & 21.58738884  & 67.9413047  & 8.242651558 & 21.35929669  & 61.2022528  & 7.82318687  & 21.17616162  & 63.21550264 & 7.950817734 \\ \hline
+Wind chill {[}deg C{]}                          & 17.83820679  & 16.26444672 & 4.032920371 & 17.94592084  & 17.03582578 & 4.127447853 & 17.77299919  & 16.54112266 & 4.067077902 & 17.83536783  & 16.55685213 & 4.069011198 & 18.2940202   & 19.13706204 & 4.374592786 \\ \hline
+Relative humidity {[}\%{]}                      & 78.18477383  & 376.010059  & 19.3909788  & 77.87831179  & 408.6230082 & 20.21442575 & 77.96285368  & 374.622643  & 19.35517096 & 77.94203719  & 389.8560405 & 19.74477249 & 76.79305051  & 406.4944626 & 20.16170783 \\ \hline
+Heat Stress Index {[}deg C{]}                   & 17.89959612  & 14.99684832 & 3.872576445 & 18.0042811   & 15.43915742 & 3.929269324 & 17.82825384  & 15.35625356 & 3.918705598 & 17.9216249   & 15.11764378 & 3.88814143  & 18.28642424  & 18.47524004 & 4.298283383 \\ \hline
+Dew Point {[}deg C{]}                           & 13.55387722  & 9.72347183  & 3.118248199 & 13.53085622  & 9.636518216 & 3.104274185 & 13.45812449  & 10.08414949 & 3.17555499  & 13.50860954  & 10.07188298 & 3.173623006 & 13.55878788  & 9.422585434 & 3.069623012 \\ \hline
+Psychro Wet Bulb Temperature {[}deg C{]}        & 15.2707189   & 6.944027119 & 2.6351522   & 15.29551696  & 6.770262723 & 2.601972852 & 15.19664511  & 7.239313447 & 2.690597229 & 15.26018593  & 7.044402877 & 2.654129401 & 15.40666667  & 6.997445432 & 2.645268499 \\ \hline
+Station pressure {[}mb{]}                       & 1016.168255  & 38.47126661 & 6.202520988 & 1016.657027  & 36.84193443 & 6.069755714 & 1016.689329  & 37.69149142 & 6.139339657 & 1016.728011  & 34.98778359 & 5.915047218 & 1016.166101  & 38.93991345 & 6.24018537  \\ \hline
+Barometric pressure {[}mb{]}                    & 1016.128433  & 38.46795084 & 6.20225369  & 1016.616478  & 36.82886775 & 6.068679243 & 1016.6519    & 37.67562316 & 6.138047178 & 1016.688884  & 34.95232686 & 5.912049294 & 1016.127798  & 38.93517684 & 6.239805833 \\ \hline
+Altitude {[}m{]}                                & -25.98707593 & 2663.641045 & 51.61047418 & -30.05815832 & 2545.708131 & 50.45501096 & -30.33872272 & 2608.534634 & 51.07381554 & -30.65319321 & 2419.723591 & 49.19068602 & -25.96121212 & 2692.353386 & 51.88789248 \\ \hline
+Density Altitude {[}m{]}                        & 137.3166397  & 26510.04435 & 162.819054  & 135.5807754  & 26863.31024 & 163.9003058 & 129.6228779  & 26986.60297 & 164.2759963 & 132.4110752  & 26516.12573 & 162.8377282 & 150.84       & 29714.9275  & 172.380183  \\ \hline
+NA Wet Bulb Tempterature {[}deg C{]}            & 15.98154281  & 10.01210768 & 3.164191473 & 15.99680937  & 9.809254462 & 3.131972934 & 15.93423605  & 10.4802791  & 3.237325918 & 15.91564268  & 9.98743414  & 3.160290199 & 15.93688889  & 9.432183526 & 3.071186013 \\ \hline
+WBGT {[}deg C{]}                                & 17.25432149  & 16.13525808 & 4.016871679 & 17.32197092  & 15.83535547 & 3.979366214 & 17.22502021  & 16.54674535 & 4.067769088 & 17.17679871  & 15.5071849  & 3.937916314 & 17.18553535  & 15.48987153 & 3.93571741  \\ \hline
+TWL {[}w/m\textasciicircum{}2{]}                & 301.3929321  & 814.7665642 & 28.5441161  & 299.4516963  & 790.0692214 & 28.10817001 & 301.8997575  & 766.5335139 & 27.68634165 & 305.2545675  & 616.0098073 & 24.81954486 & 284.1153131  & 1289.913383 & 35.91536416 \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Value of Mean, Variance and Standard Deviation of Each Variable in Sensor A, B, C, D and E}
+\end{table}
+
+\begin{table} [H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Sensor's Variable}} & \multicolumn{4}{c|}{Mean Value}                                                                                 & \multicolumn{4}{c|}{Varian Value}                                                                               & \multicolumn{4}{c|}{Standard Deviation Value}                                                                   \\ \cline{2-13} 
+\multicolumn{1}{|c|}{}                                   & \multicolumn{1}{c|}{Max} & \multicolumn{1}{c|}{Sensor} & \multicolumn{1}{c|}{Min} & \multicolumn{1}{c|}{Sensor} & \multicolumn{1}{c|}{Max} & \multicolumn{1}{c|}{Sensor} & \multicolumn{1}{c|}{Min} & \multicolumn{1}{c|}{Sensor} & \multicolumn{1}{c|}{Max} & \multicolumn{1}{c|}{Sensor} & \multicolumn{1}{c|}{Min} & \multicolumn{1}{c|}{Sensor} \\ \hline
+Wind speed {[}m/s{]}                                     & 1.581649151              & sensor D                    & 0.596242424              & sensor E                    & 1.73981677               & sensor D                    & 0.51122678               & sensor E                    & 1.319021141              & sensor D                    & 0.715001245              & sensor E                    \\ \hline
+Wind direction {[}deg{]}                                 & 223.9563636              & sensor E                    & 183.4123586              & sensor C                    & 10108.94031              & sensor E                    & 7703.363096              & sensor C                    & 100.5432261              & sensor E                    & 87.7688048               & sensor C                    \\ \hline
+Crosswind Speed {[}m/s{]}                                & 1.210509297              & sensor D                    & 0.438505051              & sensor E                    & 1.451502935              & sensor D                    & 0.315941984              & sensor E                    & 1.204783356              & sensor D                    & 0.562087168              & sensor E                    \\ \hline
+Headwind Speed {[}m/s{]}                                 & 0.194949495              & sensor E                    & -0.300565885             & sensor D                    & 1.271732179              & sensor C                    & 0.319073108              & sensor E                    & 1.127711035              & sensor C                    & 0.564865566              & sensor E                    \\ \hline
+Temperature {[}deg C{]}                                  & 18.35393939              & sensor E                    & 17.91313662              & sensor C                    & 19.04313221              & sensor E                    & 15.86426926              & sensor A                    & 4.363843743              & sensor E                    & 3.982997522              & sensor A                    \\ \hline
+Globe Temperature {[}deg C{]}                            & 21.79943457              & sensor E                    & 21.17616162              & sensor E                    & 68.19135252              & sensor E                    & 61.2022528               & sensor D                    & 8.257805551              & sensor E                    & 7.82318687               & sensor D                    \\ \hline
+Wind chill {[}deg C{]}                                   & 18.2940202               & sensor E                    & 17.77299919              & sensor C                    & 19.13706204              & sensor E                    & 16.26444672              & sensor A                    & 4.374592786              & sensor E                    & 4.032920371              & sensor A                    \\ \hline
+Relative humidity {[}\%{]}                               & 78.18477383              & sensor E                    & 76.79305051              & sensor C                    & 408.6230082              & sensor E                    & 374.622643               & sensor C                    & 20.21442575              & sensor E                    & 19.35517096              & sensor C                    \\ \hline
+Heat Stress Index {[}deg C{]}                            & 18.28642424              & sensor E                    & 17.82825384              & sensor C                    & 18.47524004              & sensor E                    & 14.99684832              & sensor A                    & 4.298283383              & sensor E                    & 3.872576445              & sensor A                    \\ \hline
+Dew Point {[}deg C{]}                                    & 13.55878788              & sensor E                    & 13.45812449              & sensor C                    & 10.08414949              & sensor C                    & 9.422585434              & sensor E                    & 3.17555499               & sensor C                    & 3.069623012              & sensor E                    \\ \hline
+Psychro Wet Bulb Temperature {[}deg C{]}                 & 15.40666667              & sensor E                    & 15.19664511              & sensor C                    & 7.239313447              & sensor C                    & 6.770262723              & sensor B                    & 2.690597229              & sensor C                    & 2.601972852              & sensor B                    \\ \hline
+Station pressure {[}mb{]}                                & 1016.728011              & sensor D                    & 1016.166101              & sensor E                    & 38.93991345              & sensor E                    & 34.98778359              & sensor D                    & 6.24018537               & sensor E                    & 5.915047218              & sensor D                    \\ \hline
+Barometric pressure {[}mb{]}                             & 1016.688884              & sensor D                    & 1016.127798              & sensor E                    & 38.93517684              & sensor E                    & 34.95232686              & sensor D                    & 6.239805833              & sensor E                    & 5.912049294              & sensor D                    \\ \hline
+Altitude {[}m{]}                                         & -25.96121212             & sensor E                    & -30.65319321             & sensor D                    & 2692.353386              & sensor E                    & 2419.723591              & sensor D                    & 51.88789248              & sensor E                    & 49.19068602              & sensor D                    \\ \hline
+Density Altitude {[}m{]}                                 & 150.84                   & sensor E                    & 129.6228779              & sensor C                    & 29714.9275               & sensor E                    & 26510.04435              & sensor A                    & 172.380183               & sensor E                    & 162.819054               & sensor A                    \\ \hline
+NA Wet Bulb Tempterature {[}deg C{]}                     & 15.99680937              & sensor E                    & 15.91564268              & sensor D                    & 10.4802791               & sensor C                    & 9.432183526              & sensor D                    & 3.237325918              & sensor C                    & 3.071186013              & sensor E                    \\ \hline
+WBGT {[}deg C{]}                                         & 17.32197092              & sensor E                    & 17.17679871              & sensor D                    & 16.54674535              & sensor C                    & 15.48987153              & sensor E                    & 4.067769088              & sensor C                    & 3.93571741               & sensor E                    \\ \hline
+TWL {[}w/m\textasciicircum{}2{]}                         & 305.2545675              & sensor D                    & 284.1153131              & sensor E                    & 1289.913383              & sensor E                    & 616.0098073              & sensor D                    & 35.91536416              & sensor E                    & 24.81954486              & sensor D                    \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}The Highest and Lowest Value of Mean, Variance and Standard Deviation}
+\end{table}
+
+\item {\it Create 1 plot that contains histograms for the 5 sensors Temperature values. Compare histograms with 5 and 50 bins, why is the number of bins important?}
+
+Figure 1 to Figure 5 show us the differences between 5 bin (on the left side) and 50 bin (on the right side) in temperature variable. From the figure, we can conclude that the more bin we have the more the data represent. If we see the histogram with 5 bin, the data grows up and down simultaneously but it is totally different if we see the histogram with 50 bin where the data is represent as it is.
+
+\setlength{\belowcaptionskip}{-15pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{0101a.png}
+    \caption{bin comparison between temperature variable in sensor A}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{0101b.png}
+    \caption{bin comparison between temperature variable in sensor B}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{0101c.png}
+    \caption{bin comparison between temperature variable in sensor C}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{0101d.png}
+    \caption{bin comparison between temperature variable in sensor D}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{0101e.png}
+    \caption{bin comparison between temperature variable in sensor E}
+    \label{fig:my_label}
+\end{figure}
+
+
+\item {\it Create 1 plot where frequency poligons for the 5 sensors Temperature values overlap in different colors with a legend}
+
+Number of bin using in this frequency poligons is measured with Rice's Rule therefore the number of bin is 27.
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0102.png}
+    \caption{Frequency Polygons for The 5 Sensors Temperature Values Overlap in Different Colors}
+    \label{fig:my_label}
+\end{figure}
+
+\item {\it Generate 3 plots that include the 5 sensors boxplot for: Wind Speed, Wind Direction and Temperature.}
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0103.png}
+    \caption{Boxplot Visualization for Temperature, Wind Speed and Wind Direction Variables for Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\end{enumerate}
+
+\begin{flushleft}
+\Large{After Lesson 02.}
+\end{flushleft}
+
+\begin{enumerate}
+
+\item {\it Plot PMF, PDF and CDF for the 5 sensors Temperature values in independent plots (or subplots). Describe the behaviour of the distributions, are they all similar? what about their tails?}. % <--- For future Homework sets you of course have to change the questions.
+
+Figure 8, 9 and 10 are the PMF, PDF and CDF for the variable temperature. In these three distribution the pattern of the temperature variable is pretty similar, we can see this by looking at the bottom right of each figure where all distribution value from each sensor is overlap (example : on the bottom right of figure 8). But the data represent in PMF, PDF and CDF itself are different. In PMF distribution (figure 9), we can see the tails are more spread out compared to PDF distribution and there are more tails on the right side of the distribution than on the left side. While in PDF distribution, the distribution is denser at the center and less dense at its tails. In CDF distribution (figure 10), there are slope and steep area. The steep area is starting around 15 deg C to 25 deg C, from this we can say that the temperature around 15 - 20 deg C has more frequency than others. 
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0201_temppmf.png}
+    \caption{PMF Distribution for Temperature Variable in Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0201_temppdf.png}
+    \caption{PDF Distribution for Temperature Variable in Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0201_tempcdf.png}
+    \caption{CDF Distribution for Temperature Variable in Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\item {\it For the Wind Speed values, plot the pdf and the kernel density estimation. Comment the differences.} % <--- For future Homework sets you of course have to change the questions.
+
+PDF distribution and KDE distribution are shown in figure 11 and figure 12. The original distribution of wind speed is likely to be large positive skew, we can see it from the PDF and KDE distribution that zero value is close to the "almost peak point" of the distribution. The PDF Distribution is tend to be more dense at its center and less dense at its tails. While the KDE Distribution still computing the value at its tails. Furthermore, KDE using gaussian distribution to filter and smooth the data therefore in the center of the distribution is slightly different with PDF distribution. Hence estimating a density function with KDE is useful especially for interpolation and simulation.
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0201_wspdf.png}
+    \caption{PDF Distribution for Temperature Variable in Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\setlength{\belowcaptionskip}{-10pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0201_wskde.png}
+    \caption{PDF Distribution for Temperature Variable in Sensor A, B, C, D and E}
+    \label{fig:my_label}
+\end{figure}
+
+\end{enumerate}
+
+\begin{flushleft}
+\Large{After Lesson 03.}
+\end{flushleft}
+
+\begin{enumerate}
+
+\item {\it Compute the correlations between all the sensors for the variables: Temperature, Wet Bulb Globe Temperature (WBGT), Crosswind Speed. Perform correlation between sensors with the same variable, not between two different variables; for example, correlate Temperature time series between sensor A and B. Use Pearson’s and Spearmann’s rank coefficients. Make a scatter plot with both coefficients with the 3 variables}. % <--- For future Homework sets you of course have to change the questions.
+\setlength{\belowcaptionskip}{-8pt}
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.9880961160961108     & 0.9886087185252324     & 0.985613462024904      & 0.9692047916162703     \\ \hline
+B                        & 0.9880961160961108     & \multicolumn{1}{c|}{-} & 0.9844851698356614     & 0.9862654029844033     & 0.9713657061948098     \\ \hline
+C                        & 0.9886087185252324     & 0.9844851698356614     & \multicolumn{1}{c|}{-} & 0.988742872420724      & 0.9720972146615465     \\ \hline
+D                        & 0.985613462024904      & 0.9862654029844033     & 0.988742872420724      & \multicolumn{1}{c|}{-} & 0.9713657061948098     \\ \hline
+E                        & 0.9692047916162703     & 0.9713657061948098     & 0.9720972146615465     & 0.9713657061948098     & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Pearson Coefficient Correlation For Temperature Variable in Every Sensors from A to E}
+\end{table}
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.9873789546525072     & 0.9882920066209426     & 0.9846272388693882       & 0.9717698000821421     \\ \hline
+B                        & 0.9713657061948098     & \multicolumn{1}{c|}{-} & 0.9854401094930247     & 0.9860487230587479     & 0.9758482550943606     \\ \hline
+C                        & 0.9882920066209426     & 9846272388693882       & \multicolumn{1}{c|}{-} & 0.988742872420724      & 0.9720972146615465     \\ \hline
+D                        & 9846272388693882       & 0.9860487230587479     & 0.988742872420724      & \multicolumn{1}{c|}{-} & 0.9713657061948098     \\ \hline
+E                        & 0.9717698000821421     & 0.9758482550943606     & 0.9720972146615465     & 0.9713657061948098     & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Spearman Coefficient Correlation For Temperature Variable in Every Sensors from A to E}
+\end{table}
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.5503525849570334     & 0.5140508798931694     & 0.4898950130186933     & 0.46512468511971494    \\ \hline
+B                        & 0.46519207768485005    & \multicolumn{1}{c|}{-} & 0.5161024168073268     & 0.48802933817375804    & 0.46519207768485005    \\ \hline
+C                        & 0.5140508798931694     & 0.5161024168073268     & \multicolumn{1}{c|}{-} & 0.5628881993613143     & 0.4732332283201256     \\ \hline
+D                        & 0.4898950130186933     & 0.48802933817375804    & 0.5628881993613143     & \multicolumn{1}{c|}{-} & 0.46519207768485005    \\ \hline
+E                        & 0.46512468511971494    & 0.46519207768485005    & 0.4732332283201256     & 0.46519207768485005    & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Pearson Coefficient Correlation For Crosswind Speed Variable in Every Sensors from A to E}
+\end{table}
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.5969825624049757     & 0.5772288910798762     & 0.6018890586328168     & 0.5378446650454964     \\ \hline
+B                        & 0.5273253265612854     & \multicolumn{1}{c|}{-} & 0.5906839137964633     & 0.604818772469813      & 0.5273253265612854     \\ \hline
+C                        & 0.5772288910798762     & 0.5906839137964633     & \multicolumn{1}{c|}{-} & 0.6359061682587346     & 0.5322320929791761     \\ \hline
+D                        & 0.6018890586328168     & 0.604818772469813      & 0.6359061682587346     & \multicolumn{1}{c|}{-} & 0.5273253265612854     \\ \hline
+E                        & 0.5378446650454964     & 0.5273253265612854     & 0.5322320929791761     & 0.5273253265612854     & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Spearman Coefficient Correlation For Crosswind Speed Variable in Every Sensors from A to E.}
+\end{table}
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.9912595533881616     & 0.9918958502071861     & 0.9870139489166732     & 0.9498286924654158     \\ \hline
+B                        & 0.9912595533881616     & \multicolumn{1}{c|}{-} & 0.9897296935232769     & 0.9878642090483686     & 0.9480902122116057     \\ \hline
+C                        & 0.9918958502071861     & 0.9897296935232769     & \multicolumn{1}{c|}{-} & 0.9918205586342286     & 0.9492695317424185     \\ \hline
+D                        & 0.9870139489166732     & 0.9878642090483686     & 0.9918205586342286     & \multicolumn{1}{c|}{-} & 0.9480902122116057     \\ \hline
+E                        & 0.9498286924654158     & 0.9480902122116057     & 0.9492695317424185     & 0.9480902122116057     & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Pearson Coefficient Correlation For Wet Bulb Globe Temperature Variable in Every Sensors from A to E.}
+\end{table}
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\cellcolor sensor & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} & \multicolumn{1}{c|}{D} & \multicolumn{1}{c|}{E} \\ \hline
+A                        & \multicolumn{1}{c|}{-} & 0.9921324359540058     & 0.9924720182971508     & 0.9882919234478525     & 0.9491275351688659     \\ \hline
+B                        & 0.9487020195244296     & \multicolumn{1}{c|}{-} & 0.9898635757569907     & 0.9873748114350143     & 0.9487020195244296     \\ \hline
+C                        & 0.9924720182971508     & 0.9898635757569907     & \multicolumn{1}{c|}{-} & 0.9914219338897717     & 0.9493455874960454     \\ \hline
+D                        & 0.9882919234478525     & 0.9873748114350143     & 0.9914219338897717     & \multicolumn{1}{c|}{-} & 0.9487020195244296     \\ \hline
+E                        & 0.9491275351688659     & 0.9487020195244296     & 0.9493455874960454     & 0.9487020195244296     & \multicolumn{1}{c|}{-} \\ \hline
+\end{tabular}
+}
+\caption{\label{tab:table-name}Spearman Coefficient Correlation For Wet Bulb Globe Temperature Variable in Every Sensors from A to E.}
+\end{table}
+
+\setlength{\belowcaptionskip}{-15pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030t_pearson.png}
+    \caption{Scatter Plot of Pearson Correlation Coefficient in Temperature Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030t_spearman.png}
+    \caption{Scatter Plot of Spearman Correlation Coefficient in Temperature Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030wbgt_pearson.png}
+    \caption{Scatter Plot of Pearson Correlation Coefficient in WBGT Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030wbgt_spearman.png}
+    \caption{Scatter Plot of Spearman Correlation Coefficient in WBGT Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030cws_pearson.png}
+    \caption{Scatter Plot of Pearson Correlation Coefficient in Crosswind Speed Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{030cws_spearman.png}
+    \caption{Scatter Plot of Spearman Correlation Coefficient in Crosswind Speed Variable for Every Correlation Between Sensors}
+    \label{fig:my_label}
+\end{figure}
+
+
+	
+\item {\it What can you say about the sensors’ correlations?}. % <--- For future Homework sets you of course have to change the questions.
+	
+The Pearson and Spearman Correlation Coefficient is almost the same for correlations between all the sensors for the temperature, WBGT and crosswind speed as we can see from Table 3 to Table 8. The coefficient for Pearson and Spearman Correlation for temperature variable has a value almost 1 therefore the temperature variable has a very strong relationship in each sensor. For example, if the temperature in sensor A is increasing then temperature in sensor D is increase too. This also aplies to variable WBGT because the value of its coefficient is almost 1. But The Pearson and Spearman Correlation Coefficient for crosswind speed has value around 0.4 - 0.5, therefore this variable is not related to each other sensor. If the value of crosswind speed is increasing in sensor A, it is uncertain whether the value of crosswind speed is increasing too in another sensor. 
+
+\item {\it If we told you that that the sensors are located as follows, hypothesize which location would you assign to each sensor and reason your hypothesis using the correlations.}. % <--- For future Homework sets you of course have to change the questions.
+	
+We have to look at the scatter plot from Figure 13 to Figure 18 (some correlation sensor in x axis are not clearly enough to see because of the very close value). if we see the scatter plot, we can see that sensor E has the lowest coefficient in every correlation with other sensor therefore the location of the sensor E must be different from the others. Then, if we check the coefficient at table 3-8, sensor C-D and sensor A-B is relatively related therefore they must be located on the same area. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assignment.PNG}
+    \caption{Hyphotesis of Location For Each Sensor}
+    \label{fig:my_label}
+\end{figure}
+
+\end{enumerate}
+
+\begin{flushleft}
+\Large{After Lesson 04.}
+\end{flushleft}
+
+\begin{enumerate}
+
+\item {\it Plot the CDF for all the sensors and for variables Temperature and Wind Speed, then compute the 95 confidence intervals for variables Temperature and Wind Speed for all the sensors and save them in a table (txt or csv form).} % <--- For future Homework sets you of course have to change the questions.
+
+\begin{table} [H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Sensor & Confidence Interval of 95\% [deg C]              \\ \hline
+Heat A & (17.81214113267346, 18.126065652463858)  \\ \hline
+Heat B & (17.90472689963894, 18.226129320070267)  \\ \hline
+Heat C & (17.754926235060246, 18.071347006653575) \\ \hline
+Heat D & (17.83814660824381, 18.15457772482005)   \\ \hline
+Heat E & (18.181933946027776, 18.525944841851015) \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name} Confidence Interval of 95\% Value of Temperature Variable}
+\end{table}
+
+\begin{table} [H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+Sensor & \multicolumn{1}{c|}{Confidence Interval of 95\% [m/s]} \\ \hline
+Heat A & (1.246227038990971, 1.3343868543854427)          \\ \hline
+Heat B & (1.1971663346979249, 1.287082453670411)          \\ \hline
+Heat C & (1.3243037885948932, 1.418622646328308)          \\ \hline
+Heat D & (1.5296480419653757, 1.633650260379006)          \\ \hline
+Heat E & (0.5680599051948441, 0.6244249432900044)         \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name} Confidence Interval of 95\% Value of Wind Speed Variable}
+\end{table}
+\setlength{\belowcaptionskip}{-15pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0401_tempcdf_CI.png}
+    \caption{CDF of Temperature Variable for Each Sensor. The Vertical Line is The Value of Confidence Interval 95\%}
+    \label{fig:my_label}
+\end{figure}
+\setlength{\belowcaptionskip}{-15pt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{0401_wscdf_CI.png}
+    \caption{CDF of Wind Speed Variable for Each Sensor. The Vertical Line is The Value of Confidence Interval 95\%}
+    \label{fig:my_label}
+\end{figure}
+
+\item {\it Test the hypothesis: the time series for Temperature and Wind Speed are the same for sensors:}
+\begin{enumerate}
+	\item{E, D}
+	\item {D, C}
+	\item {C, B}
+	\item {B, A}
+\end{enumerate}
+
+There are some steps to do hypothesis test. First, we have to do the test statistic. Second, define the null hypothesis. Third, compute p-value. Finally, the last step is to conclude whether it is significant or not. 
+
+To check the test statistic, we can see from Table 11 which give information about the absolute difference between mean value from sensor E-D, D-C, C-B and B-A. The highest different for temperature variable is between sensor E-D, meanwhile the lowest is between sensor D-C. Then, the highest different for wind speed variable is between sensor E-D and the lowest is between sensor B-A. Test statistic is only to quantify the size of the apparent effect. The bigger the differences, the farther the distance of central tendency. The next step is to define the null hypothesis, if we see the figure regarding the temperature or wind speed variable, above, we can see that each sensor has the same distribution of temperature and wind speed therefore there is no significant differences between each sensor. 
+
+After defining the null hypothesis, we can compute the p-value as shown in Table 12. From the Table 12, the smallest value is sensor E-D for temperature variable. If we convert this to percentage, the difference between sensor E-D in temperature variable is aroud 2\% while the others have a bigger differences (sensor C-B with 18\% and sensor D-C and B-A with more than 40\%). By convention, 5\% is the threshold of statistical significance therefore only sensor E-D is statistically significance for temperature variable and more likely to appear in the larger population. 
+
+For the wind speed variable, only sensor B-A that has different for more than 5\%. Therefore another sensor beside sensor B-A are statistically significance for wind speed variable and more likely to appear in the larger population.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{delta mean}       & ED          & DC          & CB          & BA          \\ \hline
+delta mean wind speed {[}m/s{]}        & 0.985406727 & 0.210185934 & 0.129338823 & 0.048182553 \\ \hline
+delta mean for temperature {[}deg C{]} & 0.357577227 & 0.083225546 & 0.152291489 & 0.096324717 \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name} The Absolute Difference Between Mean Value in Its Sensor (To Compute This, Check Table 1)}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+sensor & p-value for Temperature & p-value for Wind Speed  \\ \hline
+E,D    & 0.002711172129731209    & 3.3729639501474365e-212 \\ \hline
+D,C    & 0.4657972008220813      & 4.610149126224334e-09   \\ \hline
+C,B    & 0.18548636717619374     & 0.00010045473692816457  \\ \hline
+B,A    & 0.4004754260262924      & 0.13351922750703515     \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name} Comparison of P-Value in Some Sensors}
+\end{table}
+\item {\it What could you conclude from the p-values?}
+
+The lower the p-value, the more statistic to be significant. The p-value compute the probability of apparent effect. From the hypothesis test above, we see that the null hypothesis for the combining sensor E-D, D-C, C-B and B-A has the same distribution but only sensor E-D has the number of p-value that less than 5\%. Therefore only one combining sensor which is statistically significant
+
+\end{enumerate}
+
+\begin{flushleft}
+\Large{Bonus Question}
+\end{flushleft}
+
+\begin{enumerate}
+{\it Your “employer” wants to estimate the day of maximum and minimum potential energy consumption due to air conditioning usage. To hypothesize regarding those days, you are asked to identify the hottest and coolest day of the measurement time series provided. How would you do that? Reason and program the python routine that would allow you to identify those days.}
+\\
+\\
+First, we have to set temperature sensor that give measurement in time series. At least, there are two different sensor located in different places therefore we can the distribution value of both data. After having the temperature measurement we can do the statistic test by comparing both mean value. If both mean value are close to each other then the null hypothesis is both sensor has the same distribution. After that we can compute the p-value to confirm whether the null hypothesis is valid or not. 
+\\
+\\python code : 
+\\import math; import pandas as pd; import numpy as np; import thinkstats2;
+\\import thinkplot; import matplotlib.pyplot as plt; {from scipy import stats}; 
+\\import scipy.stats as st; {from scipy.stats import ttest ind}
+\\{+++open data and set as array+++}
+\\{df = pd.read [{\it path location}]}
+\\{+++compute mean value and set null hyphothesis+++}
+\\tempA = temperatureA.mean(); tempB = temperatureB.mean()
+\\dtemp = tempA-tempB
+\\{+++compute pvalue+++}
+\\ttest,pvaltemp = ttest ind(tempA,tempB)
+
+
+\end{enumerate}
+
+\begin{thebibliography}{}
+\bibitem{Maiullari2020}
+Daniela Maiullari and Clara Garcia Sanchez
+\textit{Measured Climate Data in Rijsenhout}
+\texttt{$https://data.4tu.nl/articles/dataset/Measured_/Climate_Data_in_Rijsenhout/12833918$}
+\end{thebibliography}
+
+
+% You might use the part below if you have extensive code to share
+
+% \clearpage
+% \section*{Python Code}
+
+% \begin{verbatim}
+% Put any big code you have here.
+
+% \end{verbatim}
+
+\end{document}
