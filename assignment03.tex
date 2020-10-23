@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath} 
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\title{Assignment 03 - GEO 1001}
+\author{Maundri Prihanggo and Pinelope Kountori }
+\date{October 2020}
+
+\begin{document}
+
+\maketitle
+
+% \section{Part 1}
+
+\begin{enumerate}
+  \item Given two vectors u =  $  \begin{bmatrix}    2\\    1\\    3  \end{bmatrix}  $ v =     $  \begin{bmatrix}    1\\    5\\    4  \end{bmatrix}  $
+  \begin{enumerate}
+      \item The length of the vector is defined by the magnitude \[ \|vector\| = \sqrt{a_{1}^2 + a_{2}^2 + a_{3}^2} \] magnitude of vector u is 3.74 and magnitude of vector v is 6.48, therefore vector v is longer than vector u
+      \item The dot product of vector u and v is 19 \begin{align*} u \cdot v &= (x_{1}y_{1} + x_{2}y_{2} + x_{3}y_{3}) \\  &= 2*1 + 1*5 + 3*4 \\ &= 2+5+12 \\ &= 19 \end{align*} 
+      \item The two vectors are not perpendicular. The angle between them is 38.41 degree. \begin{align*} u \cdot v &= \|u\| \|v\| \: cos \alpha \\ 19 &= \sqrt{14} \sqrt{42} \: cos \alpha \\ cos \alpha &= 0.783546 \\ \alpha &= 38.41^{\circ} \end{align*} 
+  \end{enumerate}
+  \item The other diagonal is v-w \begin{align*}
+      v-w &= (4,2) - (-1,2) \\ &= (4+1, 2-2) \\ &= (5,0) \\ &= \begin{bmatrix} 5 \\ 0 \end{bmatrix}
+  \end{align*}
+  \item For u =  $  \begin{bmatrix}    2\\    1\\    3  \end{bmatrix}  $ v =     $  \begin{bmatrix}    1\\    5\\    4  \end{bmatrix}  $, What is 3u+2v? \begin{align*}
+      3u + 2v &= 3(x_{1}, x_{2}, x_{3}) + 2(y_{1}, y_{2}, y_{3}) \\ &= 3(2,1,3) + 2(1,5,4) \\ &= (6,3,9) + (2,10,8) \\ &= (6+2, 3+10, 9+8) \\ &= (8, 13, 17) \\ &= \begin{bmatrix} 8\\13\\17 \end{bmatrix}  \end{align*}
+  \item u = (2x, 1y, 3z) and v = (1x, 5y, 4z), what is the normal vector? \\ n = a \, i + b \, j + c \, k ; n = normal vector \\ u = 2x \, i + 1y \, j + 3z \, k \\ v = 1x \, i + 5y \, j + 4z \, k \\ because normal vector is perpendicular to the plane on vector u and v therefore the dot product of normal vector is zero.
+  \begin{align*}
+      n \cdot (v - u) &= 0 \\ &= n(x_{v} - x_{u}) + n(y_{v} - y_{u}) + n(z_{v} - z_{u}) \\ &= a(1d-2c) + b(5d-1c) + c(4d-3c) \\ &= a \, 1d - a \, 2c + b \, 5d - b \, 1c + c \, 4d - c \, 3c \\ a \, 1d + b \, 5d + c \, 4d &= a \, 2c + b \, 1c + c \, 3c\\ A \, x + B \, y + C \, z &= D \\ n &= A \, i + B \, j + C \, k
+  \end{align*} D on the equation above can be any number therefore the normal vector can be either d(1,5,4) or c(2,1,3)
+  \item Given the following of linier equation :  \begin{align*} 2x_{1} + x_{2} - 3x_{3} = 4 \\ x_{1} + 5x_{2} + 4x_{3} = 1 \\ 3x_{1} + 6x_{2} + x_{3} = 3 \end{align*}
+  \begin{enumerate}
+      \item matrix form of linier equation :
+      \begin{align*}
+          A x &= P \\ \begin{bmatrix} 2 & 1 & -3\\ 1 & 5 & 4\\3 & 6 & 1\\ \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3}\\ \end{bmatrix} &= \begin{bmatrix} 4\\1\\3 \end{bmatrix}
+      \end{align*}
+      \item To check whether there is solution(s) or not, we can see from the determinant of matrice A. For the equation below, D is the determinant. 
+      \begin{align*}
+      D &= 2(5*1 - 6*4) + 1(1*1 - 4*3) - (-3)(1*6 - 3*5) \\ &= 2(5 - 24) + 1(1 - 12) - (-3)(6 - 15) \\ &= 2(19) + 1(-11) - (-3)(-9) \\ &= 38 + (-11) - (27) \\ &= 0
+      \end{align*}
+      The determinant of matrice A is 0 therefore it might has no solution or many solution. Then after compute using Gaussian Elimination, this linier equation has no solution because on the last part of the equation it shows 0 = -2
+      \begin{equation}
+          \left[ \begin{array}{ccc|c} \label{eq1} 2 & 1 & -3 & 4 \\ 1 & 5 & 4 & 1 \\ 3 & 6 & 1 & 3 \end{array} \right] \end{equation} 
+      \begin{equation}
+        \left [\begin{array}{ccc|c} \label{eq2} 2 & 1 & -3 & 4\\ 0 & \dfrac{9}{2} & \dfrac{11}{2} & -1\\3 & 6 & 1 &3 \end{array}\right]
+      \end{equation}
+      \begin{equation}
+        \left [\begin{array}{ccc|c} \label{eq3} 2 & 1 & -3 & 4\\ 0 & \dfrac{9}{2} & \dfrac{11}{2} & -1\\0 & \dfrac{9}{2} & \dfrac{11}{2} & -3 \end{array}\right]
+      \end{equation}
+      \begin{equation}
+        \left [\begin{array}{ccc|c} \label{eq4} 2 & 1 & -3 & 4\\ 0 & \dfrac{9}{2} & \dfrac{11}{2} & -1\\0 & 0 & 0 &-2 \end{array}\right]
+      \end{equation}
+  \end{enumerate}
+  \begin{align*} \label{eq5} 2x_{1} + x_{2} - 3x_{3} &= 4 \\ \dfrac{9}{2} x_{2} + \dfrac{11}{2} x_{3} &= -1 \\ 0 &= -2 \end{align*}
+  \item 
+  \begin{enumerate}
+      \item Compute the empirical relationship line between x and y using least squares regression. The equation of line is y = mx + b, where m is the gradient of line. 
+      \begin{enumerate}
+          \item first calculate m 
+          \begin{align*}
+              m &= \dfrac{N \cdot \Sigma (xy) - \Sigma x \cdot \Sigma y}{N \cdot \Sigma (x^2) - (\Sigma x)^2} 
+          \end{align*}
+          \item then calculate b
+          \begin{align*}
+              b &= \dfrac{\Sigma y - m \cdot \Sigma x}{N}
+          \end{align*}
+          \item Assemble the equation of the line
+          \begin{align*}
+              y &= mx + b \\ 
+          \end{align*}
+      \end{enumerate}
+      \item electricity will be consumed with a noon temperature at 21 celcius degree
+  \end{enumerate} 
+  
+\end{enumerate}
+
+\end{document}
